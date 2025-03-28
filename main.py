@@ -13,7 +13,7 @@ gc = gspread.authorize(credentials)
 sheet = gc.open("學習追蹤表").sheet1
 
 # ===== 預設值 =====
-user_list = ["Sanny"]
+user_list = ["Sanny", "Jolin"]
 topic_list = ["英語", "日語", "法語", "程式", "AI應用", "繪畫", "音樂", "社群"]
 
 # ===== Streamlit UI =====
