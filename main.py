@@ -10,7 +10,7 @@ credentials = Credentials.from_service_account_info(creds_dict)
 
 # 授權 gspread
 gc = gspread.authorize(credentials)
-sheet = gc.open("學習追蹤表").sheet1
+sheet = gc.open("Daily-Tracker").sheet1
 
 # ===== 預設值 =====
 user_list = ["Sanny", "Jolin"]
