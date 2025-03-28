@@ -1,17 +1,17 @@
 import streamlit as st
 import gspread
 from google.oauth2.service_account import Credentials
-from datetime import datetime
-import json
 
-# 讀取 Streamlit Secrets 中的金鑰資料
+SCOPES = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
+]
+
 creds_dict = st.secrets["google_service_account"]
-credentials = Credentials.from_service_account_info(creds_dict)
+credentials = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
 
-# 授權 gspread
 gc = gspread.authorize(credentials)
 sheet = gc.open("Daily-Tracker").sheet1
-
 # ===== 預設值 =====
 user_list = ["Sanny", "Jolin"]
 topic_list = ["英語", "日語", "法語", "程式", "AI應用", "繪畫", "音樂", "社群"]
