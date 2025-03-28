@@ -27,7 +27,7 @@ st.title("📘 習慣／學習追蹤表單")
 with st.form("track_form"):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
-    user = st.selectbox("👤 使用者", user_name, index=user_list.index("Sanny"))
+    user = st.selectbox("👤 使用者", user_name, index=user_name.index("Sanny"))
     topic = st.selectbox("🗂️ 主題", topic_list)
     done = st.checkbox("✅ 是否完成", value=False)
     note = st.text_area("📝 備註（可選）")
@@ -35,6 +35,7 @@ with st.form("track_form"):
     submitted = st.form_submit_button("📤 提交紀錄")
     
     if submitted:
+        st.balloons()
         # 寫入 Google Sheets
         sheet.append_row([now, user, topic, "✅" if done else "❌", note])
         st.success("✅ 已成功提交紀錄！")
