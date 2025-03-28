@@ -18,7 +18,7 @@ gc = gspread.authorize(credentials)
 sheet = gc.open("Daily-Tracker").sheet1
 
 # ===== 預設值 =====
-user_list = ["Sanny", "Jolin"]
+user_name = st.text_input("Enter your name:", value="Sanny")
 topic_list = ["英語", "日語", "法語", "程式", "AI應用", "繪畫", "音樂", "社群", "其他"]
 
 # ===== Streamlit UI =====
@@ -27,7 +27,7 @@ st.title("📘 習慣／學習追蹤表單")
 with st.form("track_form"):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
-    user = st.selectbox("👤 使用者", user_list, index=user_list.index("Sanny"))
+    user = st.selectbox("👤 使用者", user_name, index=user_list.index("Sanny"))
     topic = st.selectbox("🗂️ 主題", topic_list)
     done = st.checkbox("✅ 是否完成", value=False)
     note = st.text_area("📝 備註（可選）")
