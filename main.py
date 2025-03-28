@@ -1,15 +1,16 @@
 import streamlit as st
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
 from datetime import datetime
+import json
 
-# ===== 連接 Google Sheets =====
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
-client = gspread.authorize(creds)
+# 讀取 Streamlit Secrets 中的金鑰資料
+creds_dict = st.secrets["google_service_account"]
+credentials = Credentials.from_service_account_info(creds_dict)
 
-# 打開指定的 Google Sheets 文件（第一個工作表）
-sheet = client.open("學習追蹤表").sheet1
+# 授權 gspread
+gc = gspread.authorize(credentials)
+sheet = gc.open("學習追蹤表").sheet1
 
 # ===== 預設值 =====
 user_list = ["Sanny"]
