@@ -2,6 +2,7 @@ import streamlit as st
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime  # 👈 這一行是關鍵
+import pytz
 
 # 加上 scope
 SCOPES = [
@@ -24,9 +25,11 @@ topic_list = ["英語", "日語", "法語", "程式", "AI應用", "繪畫", "音
 # ===== Streamlit UI =====
 st.title("📘 習慣／學習追蹤表單")
 
+tz = pytz.timezone('Asia/Taipei')  # 建議這樣寫在外面
+
 with st.form("track_form"):
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
+    now = datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
     user = st.text_input("👤 使用者", value=user_name)
     topic = st.selectbox("🗂️ 主題", topic_list)
     done = st.checkbox("✅ 是否完成", value=False)
